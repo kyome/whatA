@@ -1,13 +1,13 @@
 package com.bignerdranch.android.whata;
 
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
-public class MeetingListActivity extends AppCompatActivity {
+public class MeetingActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meeting_list);
+        setContentView(R.layout.activity_meeting);
     }
 }
