@@ -18,6 +18,8 @@ public class Meeting
 
     public Meeting(){
         mId = UUID.randomUUID();
+        //테스트용 임시입력날짜
+        mDate = new Date();
     }
 
     public UUID getId() {

@@ -8,6 +8,7 @@
 
     >
     <LinearLayout
+        android:id="@+id/meeting_view_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -35,7 +36,7 @@
                 tools:text="test"
                 />
             <TextView
-                android:id="@+id/meeting_days"
+                android:id="@+id/meeting_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
