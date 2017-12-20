@@ -1,23 +1,22 @@
 package com.bignerdranch.android.whata;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-public class MeetingActivity extends FragmentActivity {
+public class MeetingActivity extends SingleFragmentActivity implements MeetingListFragment.Callbacks {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meeting);
+    protected Fragment createFragment() {
+        return new MeetingListFragment();
+    }
 
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
-        if (fragment == null) {
-            fragment = new MeetingListFragment();
-            fm.beginTransaction().add(R.id.fragment_container,fragment).commit();
-        }
+    @Override
+    public void onMeetingSelected(Meeting meeting) {
+       Intent intent = MemberListActivity.newIntent(this,meeting.getId());
+        startActivity(intent);
     }
 }

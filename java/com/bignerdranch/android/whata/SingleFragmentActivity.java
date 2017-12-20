@@ -1,31 +1,36 @@
 package com.bignerdranch.android.whata;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by KYOME on 2017-11-18.
+ * Created by KYOME on 2017-11-02.
  */
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
 
+    @LayoutRes
+    protected int getLayoutResId() {
+        return R.layout.activity_meeting;
+    }
+
     @Override
-    public void onCreate(Bundle savedInstanceStatus) {
-        super.onCreate(savedInstanceStatus);
-        setContentView(R.layout.activity_meeting);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getLayoutResId());
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
-        if(fragment ==null){
+        if (fragment == null) {
             fragment = createFragment();
-            fm.beginTransaction().add(R.id.fragment_container,fragment).commit();
+            fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
-
     }
-
 }
+

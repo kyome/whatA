@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="60dp"
+    >
+    <TextView
+        android:id="@+id/member_name"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        tools:text="이름ㄴㄴㄴ"
+
+
+        />
+    <TextView
+        android:id="@+id/member_birth"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/member_name"
+        tools:text="(생년월일)"
+        />
+
+    <CheckBox
+        android:id="@+id/checkbox_attendance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"/>
+</RelativeLayout>

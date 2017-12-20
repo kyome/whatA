@@ -1,6 +1,9 @@
 package com.bignerdranch.android.whata;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.bignerdranch.android.whata.database.MeetingBaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +17,7 @@ public class MeetingManger {
     private static MeetingManger sMeetingManger;
     private List<Meeting> mMeetings;
     private Context mContext;
-
+    private SQLiteDatabase mDatabase;
     public static MeetingManger get(Context context) {
         if (sMeetingManger == null) {
             sMeetingManger = new MeetingManger(context);
@@ -22,9 +25,13 @@ public class MeetingManger {
         return sMeetingManger;
     }
 
+
+
     private MeetingManger(Context context) {
 
         mContext = context.getApplicationContext();
+//        mDatabase = new MeetingBaseHelper(mContext).getWritableDatabase();
+
         mMeetings = new ArrayList<>();
 
         for (int i = 0 ; i<100 ; i++) {

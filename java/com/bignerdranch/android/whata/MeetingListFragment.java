@@ -1,5 +1,7 @@
 package com.bignerdranch.android.whata;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,20 +14,35 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import java.util.List;
 
-/**
- * Created by KYOME on 2017-11-18.
- */
 
 public class MeetingListFragment extends Fragment {
 
     private final String TAG = "TAG";
     private RecyclerView mMeetingRecyclerView;
+    private Callbacks mCallbacks;
+
 
 
     private MeetingAdapter mAdapter;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallbacks = (Callbacks) activity;
+    }
+
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+        mMeetingRecyclerView =null;
+    }
+
+    public interface Callbacks {
+        void onMeetingSelected (Meeting meeting);
+    }
+
     @Override
     public void onCreate(Bundle saveInstanceStatue) {
         super.onCreate(saveInstanceStatue);
@@ -48,10 +65,17 @@ public class MeetingListFragment extends Fragment {
         MeetingManger meetingManger = MeetingManger.get(getActivity());
         List<Meeting> meetings = meetingManger.getMeetings();
 
-
-        mAdapter = new MeetingAdapter(meetings);
+        if(mAdapter==null){
+            mAdapter = new MeetingAdapter(meetings);
 //        Log.d(TAG,mMeetingRecyclerView.toString());
-        mMeetingRecyclerView.setAdapter(mAdapter);
+            mMeetingRecyclerView.setAdapter(mAdapter);
+        }else {
+            mAdapter.setMeetings(meetings);
+            mAdapter.notifyDataSetChanged();
+        }
+
+
+
     }
     private class  MeetingHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView mTitleTextView;
@@ -78,8 +102,9 @@ public class MeetingListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Toast.makeText(getActivity(),mMeeting.getTitle() + "선택!", Toast.LENGTH_SHORT).show();
-        }
+            mCallbacks.onMeetingSelected(mMeeting);
 
+        }
     }
 
     private class MeetingAdapter extends RecyclerView.Adapter<MeetingHolder> {
@@ -105,7 +130,13 @@ public class MeetingListFragment extends Fragment {
         public int getItemCount() {
             return mMeetings.size();
         }
+
+        public void setMeetings (List<Meeting> meetings) {
+            mMeetings = meetings;
+        }
+
     }
+
 
 }
 
