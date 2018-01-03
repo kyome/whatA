@@ -15,7 +15,7 @@ public class MeetingDbSchema {
             public static final String TITLE = "title";
             public static final String LOCATION = "location";
             public static final String DESCRIPTION = "description";
-            public static final String DATE = "date";
+            public static final String DAYS = "days";
 
         }
     }

@@ -1,7 +1,5 @@
 package com.bignerdranch.android.whata;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,7 +40,7 @@ public class MemberListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UUID meetingId = (UUID) getArguments().getSerializable(ARG_MEETING_ID);
-        mMeeting = MeetingManger.get(getActivity()).getMeeting(meetingId);
+        mMeeting = MeetingManager.get(getActivity()).getMeeting(meetingId);
     }
 
     @Override

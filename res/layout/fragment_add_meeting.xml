@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+    >
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical">
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+            <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="모임명"
+            android:textSize="18dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            />
+
+            <EditText
+            android:id="@+id/add_meeting_title"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:layout_margin="10dp"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+            <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="장소"
+            android:textSize="18dp"
+            android:gravity="center"
+            />
+
+            <EditText
+            android:id="@+id/add_meeting_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="8"
+            android:textSize="18dp"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+            <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="시간"
+            android:textSize="18dp"
+            android:gravity="center"
+            />
+
+
+            <EditText
+            android:id="@+id/add_meeting_timeAll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:enabled="false"
+            android:layout_weight="8"
+            android:textSize="18dp"
+            tools:text="요일에 종속 고려"
+            />
+
+
+
+        </LinearLayout>
+
+
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+            <TextView
+            android:id="@+id/add_meeting_day"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="요일"
+            android:textSize="18dp"
+            android:layout_above="@+id/add_meeting_day_buttons"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+            <ImageButton
+                android:id="@+id/add_meeting_detail_time_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="모임시간 설정"
+                android:textSize="10dp"
+                android:src="@drawable/ic_time_detail_button"
+                android:background="#00ff0000"
+                android:layout_toRightOf="@+id/add_meeting_day"
+                android:layout_toEndOf="@+id/add_meeting_day"/>
+
+            <LinearLayout
+            android:id="@+id/add_meeting_day_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_meeting_detail_time_button"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            >
+
+                <Button
+                android:id="@+id/add_meeting_day_button0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:text="일"
+                android:textSize="17dp"
+                android:background="@drawable/selector_day_btn_click"
+                />
+
+                <Button
+                android:id="@+id/add_meeting_day_button1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:text="월"
+                android:textSize="17dp"
+                android:background="@drawable/selector_day_btn_click"
+                />
+
+                <Button
+                android:id="@+id/add_meeting_day_button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:text="화"
+                android:textSize="17dp"
+                android:background="@drawable/selector_day_btn_click"
+                />
+
+                <Button
+                android:id="@+id/add_meeting_day_button3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:text="수"
+                android:textSize="17dp"
+                android:background="@drawable/selector_day_btn_click"
+                />
+
+                <Button
+                android:id="@+id/add_meeting_day_button4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:text="목"
+                android:textSize="17dp"
+                android:background="@drawable/selector_day_btn_click"
+                />
+
+                <Button
+                android:id="@+id/add_meeting_day_button5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:text="금"
+                android:textSize="17dp"
+                android:background="@drawable/selector_day_btn_click"
+                />
+
+                <Button
+                android:id="@+id/add_meeting_day_button6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:text="토"
+                android:textSize="17dp"
+                android:background="@drawable/selector_day_btn_click"
+                />
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/add_meeting_time_days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:id="@+id/add_meeting_time_day0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="일"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    />
+
+
+                <EditText
+                    android:id="@+id/add_meeting_time0"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:layout_weight="8"
+                    android:textSize="18dp"
+                    tools:text="요일에 종속 고려"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_meeting_time_day1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="월"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    />
+
+
+                <EditText
+                    android:id="@+id/add_meeting_time1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:layout_weight="8"
+                    android:textSize="18dp"
+                    tools:text="요일에 종속 고려"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_meeting_time_day2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="화"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    />
+
+
+                <EditText
+                    android:id="@+id/add_meeting_time2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:layout_weight="8"
+                    android:textSize="18dp"
+                    tools:text="요일에 종속 고려"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_meeting_time_day3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="수"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    />
+
+
+                <EditText
+                    android:id="@+id/add_meeting_time3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:layout_weight="8"
+                    android:textSize="18dp"
+                    tools:text="요일에 종속 고려"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_meeting_time_day4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="목"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    />
+
+
+                <EditText
+                    android:id="@+id/add_meeting_time4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:layout_weight="8"
+                    android:textSize="18dp"
+                    tools:text="요일에 종속 고려"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_meeting_time_day5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="금"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    />
+
+
+                <EditText
+                    android:id="@+id/add_meeting_time5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:layout_weight="8"
+                    android:textSize="18dp"
+                    tools:text="요일에 종속 고려"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_meeting_time_day6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="토"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    />
+
+
+                <EditText
+                    android:id="@+id/add_meeting_time6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:layout_weight="8"
+                    android:textSize="18dp"
+                    tools:text="요일에 종속 고려"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+            <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="설명"
+            android:textSize="18dp"
+            android:gravity="center"
+            />
+
+            <EditText
+            android:id="@+id/add_meeting_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="8"
+            android:textSize="18dp"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+            <TextView
+            android:id="@+id/textView"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="구성원"
+            android:textSize="18dp"/>
+
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+                <Button
+                android:id="@+id/add_member_button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+                <Button
+                android:id="@+id/add_member_button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+                <Button
+                android:id="@+id/add_member_button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+            android:id="@+id/member_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            >
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
+

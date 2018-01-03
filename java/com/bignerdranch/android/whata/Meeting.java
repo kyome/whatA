@@ -14,12 +14,17 @@ public class Meeting
     private String mTitle;
     private String mLocation;
     private String mDescription;
-    private Date mDate;
+    private Date mDays;
+
+
+    public Meeting(UUID id){
+        mId = id;
+        mDays = new Date();
+    }
 
     public Meeting(){
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
         //테스트용 임시입력날짜
-        mDate = new Date();
     }
 
     public UUID getId() {
@@ -54,11 +59,11 @@ public class Meeting
         mDescription = description;
     }
 
-    public Date getDate() {
-        return mDate;
+    public Date getDays() {
+        return mDays;
     }
 
-    public void setDate(Date date) {
-        mDate = date;
+    public void setDays(Date days) {
+        mDays = days;
     }
 }
