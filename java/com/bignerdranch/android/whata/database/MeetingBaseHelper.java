@@ -18,15 +18,13 @@ public class MeetingBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " +MeetingDbSchema.MeetingTable.NAME + "(" +
-                " _id integer primary key autoincrement, " +
-                MeetingDbSchema.MeetingTable.Cols.UUID +", " +
+//                " _id integer primary key autoincrement, " +
+                MeetingDbSchema.MeetingTable.Cols.UUID +" PRIMARY KEY, " +
                 MeetingDbSchema.MeetingTable.Cols.TITLE +", " +
                 MeetingDbSchema.MeetingTable.Cols.DAYS +", " +
                 MeetingDbSchema.MeetingTable.Cols.LOCATION +", " +
                 MeetingDbSchema.MeetingTable.Cols.DESCRIPTION + ")"
         );
-
-
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

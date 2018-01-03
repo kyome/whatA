@@ -79,7 +79,8 @@ public class MemberListFragment extends Fragment {
         public void bindMember(Member member){
             mMember = member;
             mName.setText(member.getName());
-            mBirth.setText(member.getBirth());
+            mBirth.setText(member.getPhone());
+
         }
         @Override
         public void onClick(View view) {

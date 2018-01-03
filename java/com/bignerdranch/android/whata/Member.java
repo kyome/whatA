@@ -12,11 +12,21 @@ import java.util.regex.Pattern;
 
 public class Member {
     private UUID mId;
+    private UUID mMeetingId;
     private String mName;
-    private String mTel;
+    private String mCd;
+    private String mPhone;
     private String mBirth;
     private String mAddress;
     private Pattern mPatternOnlyNum = Pattern.compile("(^[0-9]*$)");
+
+    public Member() {
+        this(UUID.randomUUID());
+    }
+
+    public Member(UUID id) {
+        mId = id;
+    }
 
     public UUID getId() {
         return mId;
@@ -24,6 +34,14 @@ public class Member {
 
     public void setId(UUID id) {
         mId = id;
+    }
+
+    public UUID getMeetingId() {
+        return mMeetingId;
+    }
+
+    public void setMeetingId(UUID meetingId) {
+        mMeetingId = meetingId;
     }
 
     public String getName() {
@@ -35,17 +53,25 @@ public class Member {
         mName = name;
     }
 
-    public String getTel() {
-        return mTel;
+    public String getPhone() {
+        return mPhone;
     }
 
-    public void setTel(String tel) throws Exception {
-        Matcher matcher = mPatternOnlyNum.matcher(tel);
+    public void setPhone(String phone) throws Exception {
+        Matcher matcher = mPatternOnlyNum.matcher(phone);
         if(matcher.find()){
-            mTel = tel;
+            mPhone = phone;
         }else {
             throw new Exception("숫자만 입력가능");
         }
+    }
+
+    public String getCd() {
+        return mCd;
+    }
+
+    public void setCd(String cd) {
+        mCd = cd;
     }
 
     public String getBirth() {
@@ -69,4 +95,6 @@ public class Member {
     public void setAddress(String address) {
         mAddress = address;
     }
+
+
 }
