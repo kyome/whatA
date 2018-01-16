@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
@@ -56,7 +55,7 @@ public class MeetingListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_meeting_list, menu);
+        inflater.inflate(R.menu.menu_add, menu);
     }
 
     @Override
@@ -158,7 +157,7 @@ public class MeetingListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(),mMeeting.getId() + "선택!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),mMeeting.getTitle() + "선택!", Toast.LENGTH_SHORT).show();
             mCallbacks.onMeetingSelected(mMeeting);
         }
     }

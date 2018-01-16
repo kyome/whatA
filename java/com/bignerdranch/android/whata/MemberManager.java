@@ -49,12 +49,12 @@ public class MemberManager {
             }
 
             mMembers.add(member);
-            addMeeting(member);
+            addMember(member);
         }
 
     }
 
-    public void addMeeting(Member member) {
+    public void addMember(Member member) {
         ContentValues values = getContentValues(member);
         mDatabase.insert(MemberDbSchema.MemberTable.NAME,null,values);
     }

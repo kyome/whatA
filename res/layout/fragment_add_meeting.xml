@@ -82,17 +82,16 @@
             />
 
 
-            <EditText
+            <TextView
             android:id="@+id/add_meeting_timeAll"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:enabled="false"
             android:layout_weight="8"
             android:textSize="18dp"
-            tools:text="요일에 종속 고려"
+            android:inputType="time"
+            tools:text="현재시간으로 초기화 예정"
             />
-
 
 
         </LinearLayout>
@@ -231,6 +230,7 @@
                 android:id="@+id/add_meeting_time_day0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 >
                 <TextView
@@ -242,12 +242,12 @@
                     />
 
 
-                <EditText
+                <TextView
                     android:id="@+id/add_meeting_time0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:enabled="false"
+                    android:inputType="time"
                     android:layout_weight="8"
                     android:textSize="18dp"
                     tools:text="요일에 종속 고려"
@@ -258,6 +258,7 @@
                 android:id="@+id/add_meeting_time_day1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 >
                 <TextView
@@ -269,12 +270,12 @@
                     />
 
 
-                <EditText
+                <TextView
                     android:id="@+id/add_meeting_time1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:enabled="false"
+                    android:inputType="time"
                     android:layout_weight="8"
                     android:textSize="18dp"
                     tools:text="요일에 종속 고려"
@@ -285,6 +286,7 @@
                 android:id="@+id/add_meeting_time_day2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 >
                 <TextView
@@ -296,12 +298,12 @@
                     />
 
 
-                <EditText
+                <TextView
                     android:id="@+id/add_meeting_time2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:enabled="false"
+                    android:inputType="time"
                     android:layout_weight="8"
                     android:textSize="18dp"
                     tools:text="요일에 종속 고려"
@@ -312,6 +314,7 @@
                 android:id="@+id/add_meeting_time_day3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 >
                 <TextView
@@ -323,12 +326,12 @@
                     />
 
 
-                <EditText
+                <TextView
                     android:id="@+id/add_meeting_time3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:enabled="false"
+                    android:inputType="time"
                     android:layout_weight="8"
                     android:textSize="18dp"
                     tools:text="요일에 종속 고려"
@@ -339,6 +342,7 @@
                 android:id="@+id/add_meeting_time_day4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 >
                 <TextView
@@ -350,12 +354,12 @@
                     />
 
 
-                <EditText
+                <TextView
                     android:id="@+id/add_meeting_time4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:enabled="false"
+                    android:inputType="time"
                     android:layout_weight="8"
                     android:textSize="18dp"
                     tools:text="요일에 종속 고려"
@@ -366,6 +370,7 @@
                 android:id="@+id/add_meeting_time_day5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 >
                 <TextView
@@ -377,12 +382,12 @@
                     />
 
 
-                <EditText
+                <TextView
                     android:id="@+id/add_meeting_time5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:enabled="false"
+                    android:inputType="time"
                     android:layout_weight="8"
                     android:textSize="18dp"
                     tools:text="요일에 종속 고려"
@@ -393,6 +398,7 @@
                 android:id="@+id/add_meeting_time_day6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 >
                 <TextView
@@ -404,12 +410,12 @@
                     />
 
 
-                <EditText
+                <TextView
                     android:id="@+id/add_meeting_time6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:enabled="false"
+                    android:inputType="time"
                     android:layout_weight="8"
                     android:textSize="18dp"
                     tools:text="요일에 종속 고려"
@@ -467,24 +473,30 @@
             android:orientation="horizontal">
 
                 <Button
-                android:id="@+id/add_member_button1"
+                android:id="@+id/add_member_button_contact"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="연락처 추가"
+                    />
 
                 <Button
-                android:id="@+id/add_member_button2"
+                android:id="@+id/add_member_button_each"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="개별 추가"
+                    />
 
                 <Button
-                android:id="@+id/add_member_button3"
+                android:id="@+id/add_member_button_batch"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="일괄 추가"
+                    />
 
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
-            android:id="@+id/member_recycler_view"
+            android:id="@+id/add_member_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             >
