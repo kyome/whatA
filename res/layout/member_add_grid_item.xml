@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/added_member"
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_margin="2dp"
+              android:background="@drawable/selector_day_btn_click"
+              android:weightSum="1">
+
+
+    <TextView
+        android:id="@+id/added_member_name"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        tools:text="이름 이름"
+        />
+
+    <ImageButton
+        android:id="@+id/added_member_delete"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_delete"
+        android:background="#00ff0000"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/added_member_name"
+        android:layout_toEndOf="@+id/added_member_name"/>
+
+
+
+</RelativeLayout>
