@@ -1,5 +1,6 @@
 package com.bignerdranch.android.whata;
 
+import java.io.Serializable;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +11,7 @@ import java.util.regex.Pattern;
  */
 // 정규식 숫자만 Pattern.compile("(^[0-9]*$)");
 
-public class Member {
+public class Member implements Serializable {
     private UUID mId;
     private UUID mMeetingId;
     private String mName;

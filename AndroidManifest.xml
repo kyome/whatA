@@ -25,6 +25,12 @@
             >
 
         </activity>
+
+        <activity android:name=".MemberAddActivity"
+                  android:parentActivityName=".MeetingAddActivity"
+            >
+
+        </activity>
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 </manifest>

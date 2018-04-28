@@ -14,12 +14,11 @@ public class Meeting
     private String mTitle;
     private String mLocation;
     private String mDescription;
-    private Date mDays;
+
 
 
     public Meeting(UUID id){
         mId = id;
-        mDays = new Date();
     }
 
     public Meeting(){
@@ -59,11 +58,4 @@ public class Meeting
         mDescription = description;
     }
 
-    public Date getDays() {
-        return mDays;
-    }
-
-    public void setDays(Date days) {
-        mDays = days;
-    }
 }

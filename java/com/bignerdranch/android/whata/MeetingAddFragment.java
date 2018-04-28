@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 /**
@@ -36,30 +37,41 @@ import java.util.UUID;
 public class MeetingAddFragment extends Fragment {
     private static final String ARG_MEETING_ID = "meeting_id";
     private static final int REQUEST_TIME = 0;
+    private static final int REQUEST_MEMBER = 1;
 
     private Meeting mMeeting;
     private EditText mTitleEditText;
     private EditText mLocationEditText;
     private EditText mDescriptionEditText;
     private Button mAddMemberButtonEach;
+    private Button mAddMemberButtonContact;
+    private Button mAddMemberButtonBatch;
 
     private RecyclerView mAddMemberRecyclerView;
+    private TempMemberAdapter mAdapter;
     private ArrayList<Member> tempMemberList = new ArrayList<>();
 
     private LinearLayout[] mAddMeetingTimes = new LinearLayout[7];
     private Button[] mAddMeetingDayButtons = new Button[7];
     private TextView[] mAddMeetingTimeTextViews = new TextView[7];
     private TextView mAddMeetingAllTimeTextView;
+    private Date[] mAddMeeting = new Date[7];
 
     private ImageView mAddMeetingDetailTimeButton;
     private LinearLayout mAddMeetingTime;
-    boolean checkDetail;
+    private boolean checkDetail;
+    private Button mAddMemberEach;
+    private Button mAddMemberContact;
+    private Button mAddMemberBatch;
+
     private String[] backupDaysTime;
     private String backupTitle;
     private String backupLocation;
     private String backupDescription;
     private int button_id;
     private Date date;
+    private int cntSelectedDays=0;
+
 
     public MeetingAddFragment() {
         super();
@@ -148,21 +160,29 @@ public class MeetingAddFragment extends Fragment {
         if (requestCode == REQUEST_TIME) {
             date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
             Toast.makeText(getContext(), date.toString(), Toast.LENGTH_SHORT).show();
-        }
-        button_id = (int) data.getSerializableExtra(TimePickerFragment.ARG_BUTTON_ID);
+            button_id = (int) data.getSerializableExtra(TimePickerFragment.ARG_BUTTON_ID);
 
-        if(button_id == R.id.add_meeting_timeAll){
-            mAddMeetingAllTimeTextView.setText(DateFormat.format ("AA hh:mm",date).toString());
+            if (button_id == R.id.add_meeting_timeAll) {
+                mAddMeetingAllTimeTextView.setText(DateFormat.format("AA hh:mm", date).toString());
 
-            for(int i = 0 ; i < mAddMeetingTimeTextViews.length ; i++) {
+                for (int i = 0; i < mAddMeetingTimeTextViews.length; i++) {
+                    mAddMeeting[i] = date;
                     mAddMeetingTimeTextViews[i].setText(DateFormat.format("AA hh:mm", date).toString());
-            }
+                }
 
-        }
-        for(int i = 0 ; i < mAddMeetingTimeTextViews.length ; i++) {
-            if (button_id == getResources().getIdentifier("com.bignerdranch.android.whata:id/add_meeting_time" + i, null, null)) {
-                mAddMeetingTimeTextViews[i].setText(DateFormat.format("AA hh:mm", date).toString());
             }
+            for (int i = 0; i < mAddMeetingTimeTextViews.length; i++) {
+                if (button_id == getResources().getIdentifier("com.bignerdranch.android.whata:id/add_meeting_time" + i, null, null)) {
+                    mAddMeeting[i] = date;
+                    mAddMeetingTimeTextViews[i].setText(DateFormat.format("AA hh:mm", date).toString());
+                }
+            }
+        }
+
+        if(requestCode == REQUEST_MEMBER){
+            Member member = (Member) data.getSerializableExtra(AddMemberDialogFragment.EXTRA_ADDMEMBER);
+            Toast.makeText(getContext(), member.getName(), Toast.LENGTH_SHORT).show();
+            tempMemberList.add(member);
         }
     }
 
@@ -182,8 +202,27 @@ public class MeetingAddFragment extends Fragment {
         if (item.getItemId() == R.id.menue_item_ok) {
             if (mMeeting.getTitle() == null) {
                 Toast.makeText(this.getContext(), "모임명은 필수 입력입니다.", Toast.LENGTH_SHORT).show();
-            } else {
-                MeetingManager.get(this.getContext()).addMeeting(mMeeting);
+            }
+
+//            else if(cntSelectedDays < 1){
+//                Toast.makeText(this.getContext(), "모임요일을 선택해주세요.", Toast.LENGTH_SHORT).show();
+//            }
+
+            else {
+                MeetingDetail [] meetingDetails = new MeetingDetail[7];
+
+                for (int i = 0; i < meetingDetails.length; i++) {
+                    if (mAddMeetingDayButtons[i].isSelected() == true) {
+                        meetingDetails[i] = new MeetingDetail();
+                        meetingDetails[i].setId(mMeeting.getId());
+                        meetingDetails[i].setDaysCode(i);
+                        //mAddMeeting[i].getHours() 대체 방안 찾아서 적용할 것
+                        meetingDetails[i].setDaysTime(new GregorianCalendar(0, 0, 0, mAddMeeting[i].getHours(), mAddMeeting[i].getMinutes()).getTime());
+                    }
+                }
+
+
+                MeetingManager.get(this.getContext()).addMeeting(mMeeting,meetingDetails);
                 Intent intent = MeetingListActivity.newIntent(this.getContext());
                 startActivity(intent);
             }
@@ -274,6 +313,7 @@ public class MeetingAddFragment extends Fragment {
             }
         };
 
+
         //전체 시간을 보여주는 Text View 생성, 리스너 추가
         mAddMeetingAllTimeTextView = view.findViewById(R.id.add_meeting_timeAll);
         mAddMeetingAllTimeTextView.setOnClickListener(onClickListener);
@@ -301,6 +341,8 @@ public class MeetingAddFragment extends Fragment {
                 checkDetail = !checkDetail;
                 if (checkDetail == false) {
                     mAddMeetingTime.setVisibility(View.GONE);
+                } else if (cntSelectedDays == 0 ) {
+                    Toast.makeText(getContext(), "해당 요일을 선택하세요", Toast.LENGTH_SHORT).show();
                 } else {
                     mAddMeetingTime.setVisibility(View.VISIBLE);
                 }
@@ -330,8 +372,10 @@ public class MeetingAddFragment extends Fragment {
                 mAddMeetingDayButtons[0].setSelected(!mAddMeetingDayButtons[0].isSelected());
 
                 if (mAddMeetingDayButtons[0].isSelected() == false) {
+                    cntSelectedDays++;
                     mAddMeetingTimes[0].setVisibility(View.GONE);
                 } else {
+                    cntSelectedDays--;
                     mAddMeetingTimes[0].setVisibility(View.VISIBLE);
                 }
 
@@ -344,8 +388,10 @@ public class MeetingAddFragment extends Fragment {
                 mAddMeetingDayButtons[1].setSelected(!mAddMeetingDayButtons[1].isSelected());
 
                 if (mAddMeetingDayButtons[1].isSelected() == false) {
+                    cntSelectedDays++;
                     mAddMeetingTimes[1].setVisibility(View.GONE);
                 } else {
+                    cntSelectedDays--;
                     mAddMeetingTimes[1].setVisibility(View.VISIBLE);
                 }
             }
@@ -357,8 +403,10 @@ public class MeetingAddFragment extends Fragment {
                 mAddMeetingDayButtons[2].setSelected(!mAddMeetingDayButtons[2].isSelected());
 
                 if (mAddMeetingDayButtons[2].isSelected() == false) {
+                    cntSelectedDays++;
                     mAddMeetingTimes[2].setVisibility(View.GONE);
                 } else {
+                    cntSelectedDays--;
                     mAddMeetingTimes[2].setVisibility(View.VISIBLE);
                 }
             }
@@ -370,8 +418,10 @@ public class MeetingAddFragment extends Fragment {
                 mAddMeetingDayButtons[3].setSelected(!mAddMeetingDayButtons[3].isSelected());
 
                 if (mAddMeetingDayButtons[3].isSelected() == false) {
+                    cntSelectedDays++;
                     mAddMeetingTimes[3].setVisibility(View.GONE);
                 } else {
+                    cntSelectedDays--;
                     mAddMeetingTimes[3].setVisibility(View.VISIBLE);
                 }
             }
@@ -383,8 +433,10 @@ public class MeetingAddFragment extends Fragment {
                 mAddMeetingDayButtons[4].setSelected(!mAddMeetingDayButtons[4].isSelected());
 
                 if (mAddMeetingDayButtons[4].isSelected() == false) {
+                    cntSelectedDays++;
                     mAddMeetingTimes[4].setVisibility(View.GONE);
                 } else {
+                    cntSelectedDays--;
                     mAddMeetingTimes[4].setVisibility(View.VISIBLE);
                 }
             }
@@ -396,8 +448,10 @@ public class MeetingAddFragment extends Fragment {
                 mAddMeetingDayButtons[5].setSelected(!mAddMeetingDayButtons[5].isSelected());
 
                 if (mAddMeetingDayButtons[5].isSelected() == false) {
+                    cntSelectedDays++;
                     mAddMeetingTimes[5].setVisibility(View.GONE);
                 } else {
+                    cntSelectedDays--;
                     mAddMeetingTimes[5].setVisibility(View.VISIBLE);
                 }
             }
@@ -409,8 +463,10 @@ public class MeetingAddFragment extends Fragment {
                 mAddMeetingDayButtons[6].setSelected(!mAddMeetingDayButtons[6].isSelected());
 
                 if (mAddMeetingDayButtons[6].isSelected() == false) {
+                    cntSelectedDays++;
                     mAddMeetingTimes[6].setVisibility(View.GONE);
                 } else {
+                    cntSelectedDays--;
                     mAddMeetingTimes[6].setVisibility(View.VISIBLE);
                 }
             }
@@ -428,7 +484,37 @@ public class MeetingAddFragment extends Fragment {
             }
         }
 
+
+        mAddMemberButtonContact = view.findViewById(R.id.add_member_button_contact);
+        mAddMemberButtonContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
         mAddMemberButtonEach = view.findViewById(R.id.add_member_button_each);
+        mAddMemberButtonEach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = MemberAddActivity.newIntent(getContext(),mMeeting.getId());
+//                startActivityForResult(intent,ADD_MEMBER);
+
+                FragmentManager manager = getFragmentManager();
+                AddMemberDialogFragment dialog = AddMemberDialogFragment.newInstance();
+                dialog.setTargetFragment(MeetingAddFragment.this,REQUEST_MEMBER);
+                dialog.show(manager, "DIALOG_ADD_MEMBER");
+            }
+        });
+
+        mAddMemberButtonBatch =  view.findViewById(R.id.add_member_button_batch);
+        mAddMemberButtonBatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
         //추가한 구성원을 보여주기위한 RecyclerView 생성 ( 4열 그리드 레이아웃)
@@ -490,6 +576,20 @@ public class MeetingAddFragment extends Fragment {
         @Override
         public int getItemCount() {
             return tempMemberList.size();
+        }
+    }
+
+    private  void updateUI() {
+        MemberManager memberManager = MemberManager.get(getActivity());
+        List<Meeting> meetings = meetingManager.getMeetings();
+
+        if(mAdapter==null){
+            mAdapter = new MeetingAdapter(meetings);
+//        Log.d(TAG,mMeetingRecyclerView.toString());
+            mMeetingRecyclerView.setAdapter(mAdapter);
+        }else {
+            mAdapter.setMeetings(meetings);
+            mAdapter.notifyDataSetChanged();
         }
     }
 

@@ -21,7 +21,6 @@ public class MeetingBaseHelper extends SQLiteOpenHelper {
 //                " _id integer primary key autoincrement, " +
                 MeetingDbSchema.MeetingTable.Cols.UUID +" PRIMARY KEY, " +
                 MeetingDbSchema.MeetingTable.Cols.TITLE +", " +
-                MeetingDbSchema.MeetingTable.Cols.DAYS +", " +
                 MeetingDbSchema.MeetingTable.Cols.LOCATION +", " +
                 MeetingDbSchema.MeetingTable.Cols.DESCRIPTION + ")"
         );

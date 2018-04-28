@@ -152,7 +152,6 @@ public class MeetingListFragment extends Fragment {
         public void bindMeeting (Meeting meeting) {
             mMeeting =  meeting;
             mTitleTextView.setText(mMeeting.getTitle());
-            mSubTitleTextView.setText(mMeeting.getDays().toString());
         }
 
         @Override

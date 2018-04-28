@@ -15,11 +15,13 @@ public class MeetingDetailHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL( "create table "+MeetingDetailDbSchema.MeetingDetailTable.NAME+" ("
-                +MeetingDetailDbSchema.MeetingDetailTable.Cols.UUID + " PRIMARY KEY"
-                +MeetingDetailDbSchema.MeetingDetailTable.Cols.DAYSCODE + " PRIMARY KEY"
+                +MeetingDetailDbSchema.MeetingDetailTable.Cols.UUID + ", "
+                +MeetingDetailDbSchema.MeetingDetailTable.Cols.DAYSCODE + ", "
                 +MeetingDetailDbSchema.MeetingDetailTable.Cols.DAYSTIME
+                + ", PRIMARY KEY (" +MeetingDetailDbSchema.MeetingDetailTable.Cols.UUID
+                + ", "+MeetingDetailDbSchema.MeetingDetailTable.Cols.DAYSCODE+")"
                 + ", CONSTRAINT FK_MEETINGDETAIL FOREIGN KEY (" + MeetingDetailDbSchema.MeetingDetailTable.Cols.UUID+" )"
-                + " REFERENCES "+ MeetingDbSchema.MeetingTable.NAME  +" (" +MeetingDbSchema.MeetingTable.Cols.UUID+") ON UPDATE CASCADE"
+                + " REFERENCES "+ MeetingDbSchema.MeetingTable.NAME  +" (" +MeetingDbSchema.MeetingTable.Cols.UUID+") )"
         );
     }
 
